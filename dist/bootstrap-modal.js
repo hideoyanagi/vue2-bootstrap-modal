@@ -52,15 +52,15 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	module.exports = __webpack_require__(4);
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	
@@ -76,6 +76,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        needFooter: {
 	            type: Boolean,
 	            default: true
+	        },
+	        large: {
+	            type: Boolean,
+	            default: false
 	        }
 	    },
 	    data: function data() {
@@ -107,9 +111,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	};
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(3)();
 	// imports
@@ -121,9 +125,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	// exports
 
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -177,9 +181,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	
 	/* styles */
@@ -199,9 +203,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Component.exports
 
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = function normalizeComponent (
 	  rawScriptExports,
@@ -252,16 +256,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
 	    ref: "modal",
 	    staticClass: "modal fade background-darken",
 	    class: { in: _vm.isOpen,
-	      show: _vm.isShow
+	      show: _vm.isShow,
+	      'modal-lg': _vm.large
 	    },
 	    attrs: {
 	      "tabindex": "-1",
@@ -311,9 +316,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, [_vm._t("footer")], 2) : _vm._e()])])])
 	},staticRenderFns: []}
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
@@ -323,23 +328,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	if(content.locals) module.exports = content.locals;
 	// add the styles to the DOM
 	var update = __webpack_require__(8)("329bafa1", content, true);
-	// Hot Module Replacement
-	if(false) {
-	 // When the styles change, update the <style> tags
-	 if(!content.locals) {
-	   module.hot.accept("!!../node_modules/css-loader/index.js?minimize!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-5aba6b9a!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Vue2BootstrapModal.vue", function() {
-	     var newContent = require("!!../node_modules/css-loader/index.js?minimize!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-5aba6b9a!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Vue2BootstrapModal.vue");
-	     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-	     update(newContent);
-	   });
-	 }
-	 // When the module is disposed, remove the <style> tags
-	 module.hot.dispose(function() { update(); });
-	}
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*
 	  MIT License http://www.opensource.org/licenses/mit-license.php
@@ -447,27 +439,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 	
-	function listToStyles (parentId, list) {
-	  var styles = []
-	  var newStyles = {}
-	  for (var i = 0; i < list.length; i++) {
-	    var item = list[i]
-	    var id = item[0]
-	    var css = item[1]
-	    var media = item[2]
-	    var sourceMap = item[3]
-	    var part = { css: css, media: media, sourceMap: sourceMap }
-	    if (!newStyles[id]) {
-	      part.id = parentId + ':0'
-	      styles.push(newStyles[id] = { id: id, parts: [part] })
-	    } else {
-	      part.id = parentId + ':' + newStyles[id].parts.length
-	      newStyles[id].parts.push(part)
-	    }
-	  }
-	  return styles
-	}
-	
 	function createStyleElement () {
 	  var styleElement = document.createElement('style')
 	  styleElement.type = 'text/css'
@@ -478,12 +449,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	function addStyle (obj /* StyleObjectPart */) {
 	  var update, remove
 	  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
-	  var hasSSR = styleElement != null
 	
-	  // if in production mode and style is already provided by SSR,
-	  // simply do nothing.
-	  if (hasSSR && isProduction) {
-	    return noop
+	  if (styleElement) {
+	    if (isProduction) {
+	      // has SSR styles and in production mode.
+	      // simply do nothing.
+	      return noop
+	    } else {
+	      // has SSR styles but in dev mode.
+	      // for some reason Chrome can't handle source map in server-rendered
+	      // style tags - source maps in <style> only works if the style tag is
+	      // created and inserted dynamically. So we remove the server rendered
+	      // styles and inject new ones.
+	      styleElement.parentNode.removeChild(styleElement)
+	    }
 	  }
 	
 	  if (isOldIE) {
@@ -494,16 +473,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
 	  } else {
 	    // use multi-style-tag mode in all other cases
-	    styleElement = styleElement || createStyleElement()
+	    styleElement = createStyleElement()
 	    update = applyToTag.bind(null, styleElement)
 	    remove = function () {
 	      styleElement.parentNode.removeChild(styleElement)
 	    }
 	  }
 	
-	  if (!hasSSR) {
-	    update(obj)
-	  }
+	  update(obj)
 	
 	  return function updateStyle (newObj /* StyleObjectPart */) {
 	    if (newObj) {
@@ -573,9 +550,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/**
 	 * Translates the list format produced by css-loader into something
@@ -606,7 +583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;

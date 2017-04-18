@@ -8,7 +8,7 @@
 
 <template>
 
-<div ref="modal" class="modal fade background-darken" tabindex="-1" role="dialog" :class="{in:isOpen,show:isShow}" @click.self="close()" @keyup.esc="close()">
+<div ref="modal" class="modal fade background-darken" tabindex="-1" role="dialog" :class="{in:isOpen,show:isShow, 'modal-lg': large}" @click.self="close()" @keyup.esc="close()">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div v-if="needHeader" class="modal-header">
@@ -50,6 +50,10 @@ export default {
       needFooter: {
         type: Boolean,
         default: true
+      },
+      large: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
