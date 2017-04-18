@@ -8,8 +8,8 @@
 
 <template>
 
-<div ref="modal" class="modal fade background-darken" tabindex="-1" role="dialog" :class="{in:isOpen,show:isShow, 'modal-lg': large}" @click.self="close()" @keyup.esc="close()">
-    <div class="modal-dialog" role="document">
+<div ref="modal" class="modal fade background-darken" tabindex="-1" role="dialog" :class="{in:isOpen,show:isShow}" @click.self="close()" @keyup.esc="close()">
+  <div class="modal-dialog" role="document" :class="{ 'modal-lg': large }">
         <div class="modal-content">
             <div v-if="needHeader" class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="close()"><span aria-hidden="true">&times;</span></button>

@@ -587,8 +587,7 @@
 	    ref: "modal",
 	    staticClass: "modal fade background-darken",
 	    class: { in: _vm.isOpen,
-	      show: _vm.isShow,
-	      'modal-lg': _vm.large
+	      show: _vm.isShow
 	    },
 	    attrs: {
 	      "tabindex": "-1",
@@ -606,6 +605,9 @@
 	    }
 	  }, [_c('div', {
 	    staticClass: "modal-dialog",
+	    class: {
+	      'modal-lg': _vm.large
+	    },
 	    attrs: {
 	      "role": "document"
 	    }
